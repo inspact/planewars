@@ -3,6 +3,7 @@ package com.zby.runtime;
 import com.zby.base.BaseSprite;
 import com.zby.base.Drawable;
 import com.zby.base.Moveable;
+import com.zby.constant.FrameConstant;
 import com.zby.util.ImageMap;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ public class  Background extends BaseSprite implements Drawable, Moveable {
     private Image image;
 
     public Background() {
-        this(0,0, ImageMap.get("bg01"));
+        this(0, FrameConstant.FRAME_HEIGHT -ImageMap.get("bg01").getHeight(null), ImageMap.get("bg01"));
     }
 
     public Background(int x, int y, Image image) {
@@ -29,7 +30,7 @@ public class  Background extends BaseSprite implements Drawable, Moveable {
 
     @Override
     public void move() {
-        setY(getY()-1);
+        setY(getY()+FrameConstant.GAME_SPEED);
 
     }
 }
