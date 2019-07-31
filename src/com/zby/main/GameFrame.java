@@ -1,9 +1,8 @@
 package com.zby.main;
 
 import com.zby.constant.FrameConstant;
-import com.zby.runtime.Background;
-import com.zby.runtime.Bullet;
-import com.zby.runtime.Plane;
+import com.zby.runtime.*;
+import com.zby.util.ImageMap;
 
 
 import java.awt.*;
@@ -11,12 +10,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class GameFrame extends Frame {
+
     //创建背景
     private Background background = new Background();
     //创建飞机
@@ -25,17 +24,46 @@ public class GameFrame extends Frame {
     //创建子弹集合
     public final List<Bullet> bulletList = new CopyOnWriteArrayList<>();
 
+    //敌方子弹集合
+    public final List<EnemyBullet> enemyBulletList = new CopyOnWriteArrayList<>();
+
+    //创建敌方飞机集合
+    public final List<EnemyPlane> enemyPlaneList = new CopyOnWriteArrayList<>();
+
+    public boolean gameOver = false;
 
     @Override
     public void paint(Graphics g) {
-        background.draw(g);
-        plane.draw(g);
-        for (Bullet bullet : bulletList){
-            bullet.draw(g);
+        if (!gameOver){
+            background.draw(g);
+            plane.draw(g);
+            for (Bullet bullet : bulletList){
+                bullet.draw(g);
+            }
+
+            for (EnemyBullet enemyBullet : enemyBulletList) {
+                enemyBullet.draw(g);
+            }
+
+            for (EnemyPlane enemyPlane : enemyPlaneList) {
+                enemyPlane.draw(g);
+            }
+
+            for (Bullet bullet : bulletList) {
+                bullet.collisionTesting(enemyPlaneList);
+
+            }
+
+            for (EnemyBullet enemyBullet : enemyBulletList) {
+                enemyBullet.collisionTestinp(plane);
+            }
         }
 
-       g.setColor(Color.RED);
-        g.drawString("" + bulletList.size(),100,100);
+
+
+       //测试是否移除
+        g.setColor(Color.RED);
+        g.drawString("" + enemyBulletList.size(),100,100);
 
     }
 
@@ -53,7 +81,6 @@ public class GameFrame extends Frame {
         //禁用输入法
         enableInputMethods(false);
 
-
         //关闭窗口
         addWindowListener(new WindowAdapter() {
             @Override
@@ -61,6 +88,7 @@ public class GameFrame extends Frame {
                 System.exit(0);
             }
         });
+
         //添加键盘监听
         addKeyListener(new KeyAdapter() {
             @Override
@@ -90,9 +118,15 @@ public class GameFrame extends Frame {
             }
         }.start();
 
+        //游戏初始时添加敌方飞机
+        enemyPlaneList.add(new EnemyPlane(300,30, ImageMap.get("ep01")));
+        enemyPlaneList.add(new EnemyPlane(300,-50, ImageMap.get("ep01")));
+        enemyPlaneList.add(new EnemyPlane(600,30, ImageMap.get("ep01")));
+        enemyPlaneList.add(new EnemyPlane(450,20, ImageMap.get("ep01")));
 
         //显示窗口
         setVisible(true);
+
 
     }
 

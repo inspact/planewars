@@ -9,6 +9,7 @@ import com.zby.util.DateStore;
 import com.zby.util.ImageMap;
 
 import java.awt.*;
+import java.util.List;
 
 public class Bullet extends BaseSprite implements Moveable, Drawable {
 
@@ -44,5 +45,22 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
             GameFrame gameFrame = DateStore.get("gameFrame");
             gameFrame.bulletList.remove(this);
         }
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
+    }
+
+    //我方子弹碰到敌方飞机
+    public void collisionTesting(List<EnemyPlane> enemyPlaneList){
+        GameFrame gameFrame = DateStore.get("gameFrame");
+        for (EnemyPlane enemyPlane : enemyPlaneList) {
+            if (enemyPlane.getRectangle().intersects(this.getRectangle())){
+                enemyPlaneList.remove(enemyPlane);
+                gameFrame.bulletList.remove(this);
+            }
+        }
+
     }
 }

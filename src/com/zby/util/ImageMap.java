@@ -15,8 +15,11 @@ public class ImageMap {
 
         map.put("my01",ImageUtil.getImage("com\\zby\\imgs\\plane\\my_1.png"));
 
-
         map.put("mb01",ImageUtil.getImage("com\\zby\\imgs\\bullet\\myb_1.png"));
+
+        map.put("ep01",ImageUtil.getImage("com\\zby\\imgs\\plane\\ep_1.png"));
+
+        map.put("epb01",ImageUtil.getImage("com\\zby\\imgs\\bullet\\epb_1.png"));
     }
 
     public static Image get(String key){

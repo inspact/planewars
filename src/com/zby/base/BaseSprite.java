@@ -1,5 +1,7 @@
 package com.zby.base;
 
+import java.awt.*;
+
 public abstract class BaseSprite {
 
     private int x;
@@ -27,5 +29,10 @@ public abstract class BaseSprite {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+
+    public Rectangle getRectangle(){
+        return null;
     }
 }

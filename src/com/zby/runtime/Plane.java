@@ -148,5 +148,9 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
         }
     }
 
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
 
+    }
 }
