@@ -4,6 +4,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * 读取图片工具类
+ */
 public class ImageUtil {
     public static Image getImage(String path) {
         Image image = null;

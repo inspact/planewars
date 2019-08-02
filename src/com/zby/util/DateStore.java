@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DateStore {
+/**
+ * map用于存储
+ * static final 全局唯一，不可改变
+ */
 
     private static final Map<String,Object> map = new HashMap<>();
 

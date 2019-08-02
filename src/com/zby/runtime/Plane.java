@@ -10,6 +10,7 @@ import com.zby.util.ImageMap;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class Plane extends BaseSprite implements Moveable, Drawable {
 
@@ -19,7 +20,8 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
 
     private boolean fire;
 
-    private int speed = FrameConstant.GAME_SPEED * 3;
+    private int speed = FrameConstant.GAME_SPEED * 7;
+
 
     public Plane() {
         this((FrameConstant.FRAME_WIDTH - ImageMap.get("my01").getWidth(null)) / 2,
@@ -34,16 +36,17 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(image, getX(), getY(), image.getWidth(null), image.getHeight(null), null);
         move();
-      //  fire();
+        borderTesting();
+        g.drawImage(image, getX(), getY(), image.getWidth(null) / 2, image.getHeight(null) / 2, null);
+
+        //dfire();
 //        if (fire){
 //            index++;
 //            if (index >= 10 ){
 //                index = 0;
 //            }
 //        }
-
 
     }
 
@@ -58,7 +61,7 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
         if (fire) {
             GameFrame gameFrame = DateStore.get("gameFrame");
             gameFrame.bulletList.add(new Bullet(
-                    getX() + (image.getWidth(null) / 2) - (ImageMap.get("mb01").getWidth(null) / 2),
+                    getX() + (image.getWidth(null) / 4) - (ImageMap.get("mb01").getWidth(null) / 4),
                     getY() - ImageMap.get("mb01").getHeight(null),
                     ImageMap.get("mb01")
             ));
@@ -71,6 +74,7 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
      */
     @Override
     public void move() {
+
         if (up) {
             setY(getY() - speed);
         }
@@ -91,7 +95,6 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             up = true;
         }
-
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
@@ -103,9 +106,8 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
         }
         if (e.getKeyCode() == KeyEvent.VK_J) {
             fire = true;
-
         }
-        borderTesting();
+
     }
 
     /**
@@ -132,7 +134,6 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             up = false;
         }
-
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
         }
@@ -150,7 +151,9 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public Rectangle getRectangle() {
-        return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
+        return new Rectangle(getX(), getY(), image.getWidth(null), image.getHeight(null));
 
     }
+
+
 }

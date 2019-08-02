@@ -15,10 +15,11 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
 
     private Image image;
 
-    private int speed  = FrameConstant.GAME_SPEED*5;
+    private int speed = FrameConstant.GAME_SPEED * 5;
+
 
     public Bullet() {
-        this(0,0, ImageMap.get("mb01"));
+        this(0, 0, ImageMap.get("mb01"));
     }
 
     public Bullet(int x, int y, Image image) {
@@ -28,9 +29,10 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public void draw(Graphics g) {
-       g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
-       move();
-       borderTesting();
+        move();
+        borderTesting();
+        g.drawImage(image, getX(), getY(), image.getWidth(null) / 2, image.getHeight(null) / 2, null);
+
 
     }
 
@@ -40,8 +42,8 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
     }
 
 
-    public  void borderTesting(){
-        if (getY() < 30 -image.getHeight(null)){
+    public void borderTesting() {
+        if (getY() < 30 - image.getHeight(null)) {
             GameFrame gameFrame = DateStore.get("gameFrame");
             gameFrame.bulletList.remove(this);
         }
@@ -49,18 +51,43 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public Rectangle getRectangle() {
-        return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
+        return new Rectangle(getX(), getY(), image.getWidth(null), image.getHeight(null));
     }
 
     //我方子弹碰到敌方飞机
-    public void collisionTesting(List<EnemyPlane> enemyPlaneList){
+    public void collisionTesting(List<EnemyPlane> enemyPlaneList) {
         GameFrame gameFrame = DateStore.get("gameFrame");
         for (EnemyPlane enemyPlane : enemyPlaneList) {
-            if (enemyPlane.getRectangle().intersects(this.getRectangle())){
+            if (enemyPlane.getRectangle().intersects(this.getRectangle())) {
                 enemyPlaneList.remove(enemyPlane);
                 gameFrame.bulletList.remove(this);
+                gameFrame.count++;
+                if (enemyPlane.type == 1) {
+                    gameFrame.score += 1;
+
+                }
+                if (enemyPlane.type == 2) {
+                    gameFrame.score += 2;
+                }
+                if (enemyPlane.type == 3) {
+                    gameFrame.score += 3;
+                }
             }
         }
+    }
 
+    //我方子弹碰到boss
+    public void collisionTesting1(Boss bosses) {
+        GameFrame gameFrame = DateStore.get("gameFrame");
+        if (bosses.getRectangle().intersects(this.getRectangle())) {
+            gameFrame.bulletList.remove(this);
+            if (gameFrame.count >= 15) {
+                gameFrame.bhp -= 2;
+                if (gameFrame.bhp <= 0) {
+                    gameFrame.score += 50;
+                    gameFrame.gameOver = true;
+                }
+            }
+        }
     }
 }
