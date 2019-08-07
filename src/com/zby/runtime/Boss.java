@@ -38,17 +38,17 @@ public class Boss extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public void draw(Graphics g) {
-        move();
-        borderTesting();
-        fire();
-        g.drawImage(imageList.get(index++ / 10), getX(), getY() + 100,
-                imageList.get(0).getWidth(null) / 2,
-                imageList.get(0).getHeight(null) / 2,
-                null);
-        if (index >= 90) {
-            index = 0;
-        }
 
+            move();
+            borderTesting();
+            fire();
+            g.drawImage(imageList.get(index++ / 10), getX(), getY() + 100,
+                    imageList.get(0).getWidth(null) / 2,
+                    imageList.get(0).getHeight(null) / 2,
+                    null);
+            if (index >= 90) {
+                index = 0;
+            }
 
     }
 

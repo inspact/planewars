@@ -11,24 +11,30 @@ public class ImageMap {
 
     static {
         map.put("bg01",ImageUtil.getImage("com\\zby\\imgs\\bg\\bg01.png"));
+        map.put("bg02",ImageUtil.getImage("com\\zby\\imgs\\bg\\bg02.jpg"));
 
         map.put("my01",ImageUtil.getImage("com\\zby\\imgs\\plane\\my_1.png"));
-
+        //我方子弹
         map.put("mb01",ImageUtil.getImage("com\\zby\\imgs\\bullet\\myb_1.png"));
+        map.put("mb02",ImageUtil.getImage("com\\zby\\imgs\\bullet\\myb_01.png"));
+        map.put("mb03",ImageUtil.getImage("com\\zby\\imgs\\bullet\\myb_2.png"));
+        map.put("mb04",ImageUtil.getImage("com\\zby\\imgs\\bullet\\myb_3.png"));
 
+
+        //敌方飞机
         map.put("ep01",ImageUtil.getImage("com\\zby\\imgs\\plane\\ep_1.png"));
         map.put("ep02",ImageUtil.getImage("com\\zby\\imgs\\plane\\ep_2.png"));
         map.put("ep03",ImageUtil.getImage("com\\zby\\imgs\\plane\\ep_3.png"));
-
+        //敌方子弹
         map.put("epb01",ImageUtil.getImage("com\\zby\\imgs\\bullet\\epb_1.png"));
         map.put("epb02",ImageUtil.getImage("com\\zby\\imgs\\bullet\\epb_2.png"));
         map.put("epb03",ImageUtil.getImage("com\\zby\\imgs\\bullet\\epb_3.png"));
 
-
+        //道具
         map.put("defend",ImageUtil.getImage("com\\zby\\imgs\\prop\\adddefense1.png"));
         map.put("hp",ImageUtil.getImage("com\\zby\\imgs\\prop\\addHP1.png"));
 
-
+        //boss
         map.put("boss1",ImageUtil.getImage("com\\zby\\imgs\\boss\\boss_A_01.png"));
         map.put("boss2",ImageUtil.getImage("com\\zby\\imgs\\boss\\boss_A_02.png"));
         map.put("boss3",ImageUtil.getImage("com\\zby\\imgs\\boss\\boss_A_03.png"));
@@ -43,7 +49,7 @@ public class ImageMap {
 
 
 
-
+        //爆炸
         map.put("e1",ImageUtil.getImage("com\\zby\\imgs\\explode\\e1.png"));
         map.put("e2",ImageUtil.getImage("com\\zby\\imgs\\explode\\e2.png"));
         map.put("e3",ImageUtil.getImage("com\\zby\\imgs\\explode\\e3.png"));

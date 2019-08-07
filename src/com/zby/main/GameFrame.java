@@ -78,6 +78,7 @@ public class GameFrame extends Frame {
         if (!gameOver) {
             background.draw(g);
             plane.draw(g);
+            explode.draw(g);
             /**
              * 绘制敌方飞机，不同阶段a
              * 随机数。每时段刷新
@@ -105,21 +106,30 @@ public class GameFrame extends Frame {
                 }
             }
             if (count >= 15) {
+                enemyPlaneList.remove(enemyPlaneList);
+                pass = 4;
                 boss.draw(g);
+
+                //我方子弹攻击boss
+                for (Bullet bullet : bulletList) {
+                    bullet.collisionTesting1(boss);
+                }
                 //boss血量
                 g.setFont(new Font("黑体", Font.BOLD, 20));
                 g.setColor(new Color(124, 255, 223));
                 g.drawString("boss血量:" + bhp, 80, 210);
 
+
             }
 
+
             //道具
-            if (random.nextInt(1000) > 993) {
-                if (pass >= 1) {
+            if (random.nextInt(1000) > 995) {
+                if (pass >= 2) {
                     propList.add(new Prop(random.nextInt(FrameConstant.FRAME_WIDTH - ImageMap.get("hp").getWidth(null)),
                             30 - ImageMap.get("hp").getHeight(null), 1));
                 }
-                if (pass >=2) {
+                if (pass >= 2) {
                     propList.add(new Prop(random.nextInt(FrameConstant.FRAME_WIDTH - ImageMap.get("defend").getWidth(null)),
                             30 - ImageMap.get("defend").getHeight(null), 2));
                 }
@@ -128,6 +138,7 @@ public class GameFrame extends Frame {
 
             //遍历，输出子弹
             for (Bullet bullet : bulletList) {
+
                 bullet.draw(g);
             }
             //敌方子弹
@@ -141,10 +152,10 @@ public class GameFrame extends Frame {
 
 
             //我方子弹击打敌方飞机
-            //我方子弹攻击boss
+
             for (Bullet bullet : bulletList) {
                 bullet.collisionTesting(enemyPlaneList);
-                bullet.collisionTesting1(boss);
+
             }
             //敌方子弹击打我方飞机
             for (EnemyBullet enemyBullet : enemyBulletList) {

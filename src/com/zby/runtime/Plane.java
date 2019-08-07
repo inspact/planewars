@@ -117,14 +117,14 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
         if (getX() < 0) {
             setX(0);
         }
-        if (getX() > FrameConstant.FRAME_WIDTH - image.getWidth(null)) {
-            setX(FrameConstant.FRAME_WIDTH - image.getWidth(null));
+        if (getX() > FrameConstant.FRAME_WIDTH - image.getWidth(null)/2) {
+            setX(FrameConstant.FRAME_WIDTH - image.getWidth(null)/2);
         }
         if (getY() < 30) {
             setY(30);
         }
-        if (getY() > FrameConstant.FRAME_HEIGHT - image.getHeight(null)) {
-            setY(FrameConstant.FRAME_HEIGHT - image.getHeight(null));
+        if (getY() > FrameConstant.FRAME_HEIGHT - image.getHeight(null)/2) {
+            setY(FrameConstant.FRAME_HEIGHT - image.getHeight(null)/2);
         }
 
 
@@ -151,7 +151,7 @@ public class Plane extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public Rectangle getRectangle() {
-        return new Rectangle(getX(), getY(), image.getWidth(null), image.getHeight(null));
+        return new Rectangle(getX(), getY(), image.getWidth(null)/2, image.getHeight(null)/2);
 
     }
 

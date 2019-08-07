@@ -132,7 +132,7 @@ public class EnemyPlane extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public Rectangle getRectangle() {
-        return new Rectangle(getX(), getY(), image.getWidth(null), image.getHeight(null));
+        return new Rectangle(getX(), getY(), image.getWidth(null)/2, image.getHeight(null)/2);
     }
 
     //两飞机相撞，敌方死，我方血量减

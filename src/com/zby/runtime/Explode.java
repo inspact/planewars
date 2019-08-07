@@ -36,7 +36,7 @@ public class Explode extends BaseSprite implements Drawable, Moveable {
     public void draw(Graphics g) {
 
         if (index < 9) {
-            g.drawImage(imageList.get(index++ / 2), getX(), getY(),
+            g.drawImage(imageList.get(index++ / 2), getX()+100, getY()+100,
                     imageList.get(0).getWidth(null),
                     imageList.get(0).getHeight(null),
                     null);

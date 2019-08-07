@@ -70,7 +70,7 @@ public class EnemyBullet extends BaseSprite implements Moveable, Drawable {
 
     @Override
     public Rectangle getRectangle() {
-        return new Rectangle(getX(), getY(), image.getWidth(null), image.getHeight(null));
+        return new Rectangle(getX(), getY(), image.getWidth(null)/2, image.getHeight(null)/2);
     }
 
     //敌方子弹攻击我方飞机

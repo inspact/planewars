@@ -14,8 +14,12 @@ import java.util.List;
 public class Bullet extends BaseSprite implements Moveable, Drawable {
 
     private Image image;
+    private Image image1;
+    private Image image2;
+    private Image image3;
 
     private int speed = FrameConstant.GAME_SPEED * 5;
+
 
 
     public Bullet() {
@@ -25,13 +29,32 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
     public Bullet(int x, int y, Image image) {
         super(x, y);
         this.image = image;
+        this.image1 = ImageMap.get("mb02");
+        this.image2 = ImageMap.get("mb03");
+        this.image3 = ImageMap.get("mb04");
     }
 
     @Override
     public void draw(Graphics g) {
         move();
         borderTesting();
-        g.drawImage(image, getX(), getY(), image.getWidth(null) / 2, image.getHeight(null) / 2, null);
+        GameFrame gameFrame = DateStore.get("gameFrame");
+
+        if (gameFrame.pass == 1){
+            g.drawImage(image, getX(), getY(), image.getWidth(null) / 2, image.getHeight(null) / 2, null);
+
+        }if (gameFrame.pass ==2){
+            g.drawImage(image1, getX(), getY(), image.getWidth(null) / 2, image.getHeight(null) / 2, null);
+
+        }
+        if (gameFrame.pass ==3){
+            g.drawImage(image2, getX(), getY(), image.getWidth(null) / 2, image.getHeight(null) / 2, null);
+
+        }
+        if (gameFrame.pass ==4){
+            g.drawImage(image3, getX(), getY(), image.getWidth(null) / 2, image.getHeight(null) / 2, null);
+
+        }
 
 
     }
@@ -44,6 +67,10 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
 
     public void borderTesting() {
         if (getY() < 30 - image.getHeight(null)) {
+            GameFrame gameFrame = DateStore.get("gameFrame");
+            gameFrame.bulletList.remove(this);
+        }
+        if (getY() < 30 - image1.getHeight(null)) {
             GameFrame gameFrame = DateStore.get("gameFrame");
             gameFrame.bulletList.remove(this);
         }
@@ -64,7 +91,6 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
                 gameFrame.count++;
                 if (enemyPlane.type == 1) {
                     gameFrame.score += 1;
-
                 }
                 if (enemyPlane.type == 2) {
                     gameFrame.score += 2;
@@ -81,13 +107,13 @@ public class Bullet extends BaseSprite implements Moveable, Drawable {
         GameFrame gameFrame = DateStore.get("gameFrame");
         if (bosses.getRectangle().intersects(this.getRectangle())) {
             gameFrame.bulletList.remove(this);
-            if (gameFrame.count >= 15) {
+
                 gameFrame.bhp -= 2;
                 if (gameFrame.bhp <= 0) {
                     gameFrame.score += 50;
                     gameFrame.gameOver = true;
                 }
-            }
+
         }
     }
 }
